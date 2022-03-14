@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CountryModel;
 use Illuminate\Support\Facades\Validator;
+use phpseclib3\File\ASN1\Maps\CountryName;
 
 class Country extends Controller
 {
@@ -16,7 +17,8 @@ class Country extends Controller
      */
     public function index()
     {
-        return response()->json(CountryModel::get(), 200);
+        $countryList = CountryModel::Paginate(10);
+        return response()->json($countryList, 200);
     }
 
     /**
@@ -26,7 +28,6 @@ class Country extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -108,5 +109,10 @@ class Country extends Controller
         }
         $country->delete();
         return response()->json(null, 204);
+    }
+
+    public function search()
+    {
+        # code...
     }
 }

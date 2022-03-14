@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Country\Country;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,20 @@ Route::put('country/{country}', 'App\Http\Controllers\Country\CountryController@
 Route::delete('country/{country}', 'App\Http\Controllers\Country\CountryController@countryDelete');
 */
 
-Route::apiResource('country','App\Http\Controllers\Country\Country');
+/*
+Route::apiResource('country', 'Country\Country_Controller')->middleware('client');
+*/
+
+//Route::apiResource('country', 'App\Http\Controllers\Country\Country');
+
+//Route::get('file/country_list', 'App\Http\Controllers\FileController@countryList');
+
+//Route::post('file/country_list', 'App\Http\Controllers\FileController@countrySave');
+
+Route::apiResource("/country", Country::class);
+
+Route::post('country/search',[Country::class,'search']); //dummy
+
+Route::post('file/country_list', [FileController::class,'countrySave']);
+
+Route::get('file/country_list', [FileController::class, 'countryList']);
